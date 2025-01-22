@@ -10,7 +10,7 @@ const Header = () => {
     { name: "CONTACT", path: "/contact" },
   ];
 
-  const [token, setToken] = useState(true); // Correcting the state setter name
+  const [token, setToken] = useState(false); // Correcting the state setter name
   const [menu, setShowmenu] = useState(false); // Correcting the state setter
 
   return (
@@ -65,7 +65,7 @@ const Header = () => {
             </div>
           </div>
         ) : (
-          <button className="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition-all shadow-lg hidden md:block">
+          <button className="bg-primary text-white px-6 py-2 rounded-full hover:bg-blue-700 transition-all shadow-lg hidden md:block">
             Create Account
           </button>
         )}
