@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useRef } from "react";
 import { assets } from "../assets/assets_frontend/assets";
 
 const Hero = () => {
+  const pageRef = useRef(null);
+
+  const handleScroll = () => {
+    pageRef.current.scrollIntoView({ behavior: "smooth" });
+  };
   return (
-    <div className="w-full flex flex-col md:flex-row bg-primary rounded-lg items-center justify-between mt-4 gap-4  md:px-10 ">
+    <div
+      ref={pageRef}
+      className="w-full flex flex-col md:flex-row bg-primary rounded-lg items-center justify-between mt-4 gap-4  md:px-10 "
+    >
       {/* Left Section */}
       <div className="w-full md:w-1/2 flex flex-col items-center md:items-start justify-center gap-6 text-center md:text-left p-8 md:px-10 md:m-auto">
         <p className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight">
@@ -20,7 +28,10 @@ const Hero = () => {
         </div>
 
         <div className="flex items-center md:items-start justify-center md:justify-start w-full">
-          <button className="bg-white  px-8 py-3 text-gray-600 rounded-full font-semibold flex items-center gap-2 hover:scale-105 transition-all duration-500 m-auto md:m-0">
+          <button
+            onClick={handleScroll}
+            className="bg-white  px-8 py-3 text-gray-600 rounded-full font-semibold flex items-center gap-2 hover:scale-105 transition-all duration-500 m-auto md:m-0"
+          >
             Book appointment
             <img src={assets.arrow_icon} alt="arrow icon" />
           </button>

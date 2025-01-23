@@ -1,13 +1,12 @@
 import { useState } from "react";
-import Header from "./components/header";
-import Hero from "./components/hero";
+
+import Home from "./pages/Home";
 
 function App() {
   return (
     <>
       <div className="mx-4 sm:mx-[10%] mt-4">
-        <Header />
-        <Hero />
+        <Home />
       </div>
     </>
   );

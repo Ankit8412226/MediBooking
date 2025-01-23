@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+/* For the active class */
 .active {
   @apply block;
+}
+
+/* Correct the pseudo-element for the scrollbar */
+::-webkit-scrollbar {
+  display: none; /* Hide the scrollbar */
 }
