@@ -14,7 +14,7 @@ const Header = () => {
   const [menu, setShowmenu] = useState(false); // Correcting the state setter
 
   return (
-    <div className="w-full border-b border-gray-300 flex items-center justify-between p-4 bg-white sticky top-0 z-999  ">
+    <div className="w-full border-b border-gray-300 flex items-center justify-between p-4 bg-white  z-999  ">
       {/* Logo Section */}
       <div className="flex items-center justify-center">
         <img src={assets.logo} alt="Neurologist" className="h-10" />
