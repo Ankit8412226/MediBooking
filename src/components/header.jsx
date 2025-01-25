@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { assets } from "../assets/assets_frontend/assets";
 import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const navigationItems = [
@@ -12,6 +13,12 @@ const Header = () => {
 
   const [token, setToken] = useState(false); // Correcting the state setter name
   const [menu, setShowmenu] = useState(false); // Correcting the state setter
+
+  const navigate = useNavigate(); // Correcting the useNavigate hook
+
+  const handeLoginClicks = () => {
+    navigate("/Login");
+  };
 
   return (
     <div className="w-full border-b border-gray-300 flex items-center justify-between p-4 bg-white  z-999  ">
@@ -65,7 +72,10 @@ const Header = () => {
             </div>
           </div>
         ) : (
-          <button className="bg-primary text-white px-6 py-2 rounded-full hover:bg-blue-700 transition-all shadow-lg hidden md:block">
+          <button
+            onClick={handeLoginClicks}
+            className="bg-primary text-white px-6 py-2 rounded-full hover:bg-blue-700 transition-all shadow-lg hidden md:block"
+          >
             Create Account
           </button>
         )}
