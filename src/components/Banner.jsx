@@ -1,7 +1,13 @@
 import React from "react";
 import { assets } from "../assets/assets_frontend/assets";
+import { useNavigate } from "react-router-dom";
 
 const Banner = () => {
+  const navigate = useNavigate();
+  const handleCreateAccount = () => {
+    navigate("/register");
+    // TODO: Implement create account logic here
+  };
   return (
     <div className="bg-primary w-full h-full px-6 md:px-10 lg:px-20 mt-4 rounded-lg flex items-center justify-between flex-wrap md:flex-nowrap flex-col md:flex-row lg:flex-row min-h-[16rem] py-16 relative">
       <div className="flex items-center justify-center w-full flex-col gap-6">
@@ -11,7 +17,10 @@ const Banner = () => {
         </p>
 
         <div className="mt-6 md:mt-4 w-full flex flex-start">
-          <button className="bg-white px-8 py-3 text-gray-600 rounded-full font-semibold flex items-center gap-2 hover:scale-105 transition-all duration-500 m-auto md:m-0">
+          <button
+            onClick={handleCreateAccount}
+            className="bg-white px-8 py-3 text-gray-600 rounded-full font-semibold flex items-center gap-2 hover:scale-105 transition-all duration-500 m-auto md:m-0"
+          >
             Create Account
           </button>
         </div>
