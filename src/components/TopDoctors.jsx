@@ -38,7 +38,7 @@ const TopDoctors = () => {
         </div>
 
         {/* Doctors List */}
-        <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 px-3 sm:px-0">
+        <div className="w-full grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 px-3 sm:px-0">
           {doctors.slice(0, 10).map((item, index) => (
             <div
               key={item.id}
@@ -55,10 +55,10 @@ const TopDoctors = () => {
                 <span className="w-2 h-2 bg-green-500 rounded-full border-4 border-green-500"></span>
                 Available
               </p>
-              <p className="text-sm font-semibold text-left text-gray-800 px-4 ">
+              <p className="text-xs md:text-sm  font-tiny text-left text-gray-800 px-4 ">
                 {item.name}
               </p>
-              <p className="text-sm text-left text-gray-800 px-4 mb-4">
+              <p className="text-xs md:text-sm text-left text-gray-800 px-4 mb-4">
                 {item.speciality}
               </p>
             </div>
