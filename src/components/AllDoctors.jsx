@@ -48,7 +48,7 @@ const AllDoctors = () => {
     <div className="w-full gap-y-6 flex flex-col items-start justify-center">
       {/* Mobile Header - Only visible on small screens */}
       <div className="sm:hidden w-full">
-        <div className="flex items-center justify-between text-sm py-4 mb-5 border-b border-b-[#ADADAD]">
+        <div className="flex items-center justify-between text-sm py-4 mb-2 border-b border-b-[#ADADAD]">
           <p className="text-gray-600">
             Browse through the doctors specialist.
           </p>
@@ -86,7 +86,7 @@ const AllDoctors = () => {
       </div>
 
       {/* Desktop Layout - Hidden on small screens */}
-      <p className="hidden sm:block text-lg text-gray-600 font-medium mb-4">
+      <p className="hidden sm:block text-lg text-gray-600 font-medium mt-2">
         Browse through the doctors specialists.
       </p>
 
