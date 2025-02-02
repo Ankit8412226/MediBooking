@@ -1,83 +1,145 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { doctors } from "../assets/assets_frontend/assets";
 
 const AllDoctors = () => {
-  const [filterOpen, setFilterOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [filterDoc, setFilterDoc] = useState([]);
+  const [activeSpecialty, setActiveSpecialty] = useState("");
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
 
-  const toggleFilter = () => {
-    setFilterOpen(!filterOpen);
+  const speciality = new URLSearchParams(location.search).get("speciality");
+
+  const specialties = [
+    "General physician",
+    "Gynecologist",
+    "Dermatologist",
+    "Pediatrician",
+    "Neurologist",
+    "Gastroenterologist",
+  ];
+
+  const applyFilter = () => {
+    if (speciality) {
+      setFilterDoc(doctors.filter((doc) => doc.speciality === speciality));
+      setActiveSpecialty(speciality);
+    } else {
+      setFilterDoc(doctors);
+      setActiveSpecialty("");
+    }
+  };
+
+  useEffect(() => applyFilter(), [speciality]);
+
+  const handleSpecialtyClick = (specialty) => {
+    if (activeSpecialty === specialty) {
+      navigate("?");
+      setActiveSpecialty("");
+      setFilterDoc(doctors);
+    } else {
+      navigate(`?speciality=${specialty}`);
+      setActiveSpecialty(specialty);
+      setFilterDoc(doctors.filter((doc) => doc.speciality === specialty));
+    }
   };
 
   return (
-    <>
-      <div className="container mx-auto px-4">
-        <p className="text-center text-lg font-medium mb-4">
-          Browse through the doctors specialist.
-        </p>
+    <div className="w-full gap-y-6 flex flex-col items-start justify-center">
+      {/* Mobile Header - Only visible on small screens */}
+      <div className="sm:hidden w-full">
+        <div className="flex items-center justify-between text-sm py-4 mb-5 border-b border-b-[#ADADAD]">
+          <p className="text-gray-600">
+            Browse through the doctors specialist.
+          </p>
+          <button
+            className="py-1 px-3 border rounded text-sm transition-all"
+            onClick={() => setIsFilterOpen(!isFilterOpen)}
+          >
+            Filters
+          </button>
+        </div>
 
-        <div className="flex flex-col lg:flex-row items-start justify-center gap-6">
-          {/* Filters Section */}
-          <div className="w-full lg:w-1/4">
-            <p
-              className="lg:hidden bg-blue-100 px-4 py-2 rounded-md text-blue-800 cursor-pointer"
-              onClick={toggleFilter}
-            >
-              {filterOpen ? "Hide Filters" : "Show Filters"}
-            </p>
-
-            {/* Filters list */}
+        {/* Mobile Filters */}
+        <div
+          className={`flex flex-col gap-4 text-sm mb-6 ${
+            !isFilterOpen && "hidden"
+          }`}
+        >
+          {specialties.map((specialty) => (
             <div
-              className={`flex flex-col gap-3 mt-4 ${
-                filterOpen ? "block" : "hidden"
-              } lg:block`}
+              key={specialty}
+              onClick={() => handleSpecialtyClick(specialty)}
+              className={`
+                w-full px-3 py-1 border rounded cursor-pointer transition-all
+                ${
+                  activeSpecialty === specialty
+                    ? "text-primary border-primary bg-primary/5"
+                    : "text-gray-600 border-gray-300"
+                }
+              `}
             >
-              <button className="py-2 px-4 border border-gray-300 rounded-md hover:bg-blue-100">
-                General Physician
-              </button>
-              <button className="py-2 px-4 border border-gray-300 rounded-md hover:bg-blue-100">
-                Gynecologist
-              </button>
-              <button className="py-2 px-4 border border-gray-300 rounded-md hover:bg-blue-100">
-                Dermatologist
-              </button>
-              <button className="py-2 px-4 border border-gray-300 rounded-md hover:bg-blue-100">
-                Pediatricians
-              </button>
-              <button className="py-2 px-4 border border-gray-300 rounded-md hover:bg-blue-100">
-                Neurologist
-              </button>
-              <button className="py-2 px-4 border border-gray-300 rounded-md hover:bg-blue-100">
-                Gastroenterologist
-              </button>
+              {specialty}
             </div>
-          </div>
-
-          {/* Doctors List */}
-          <div className="w-full lg:w-3/4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            {doctors.slice(0, 10).map((item) => (
-              <div
-                key={item.id}
-                className="flex flex-col border border-gray-200 rounded-xl p-4 shadow-md hover:shadow-lg transition-shadow"
-              >
-                <div className="w-full bg-blue-50 rounded-t-xl overflow-hidden">
-                  <img
-                    src={item.image}
-                    alt={`Doctor ${item.name}`}
-                    className="object-cover w-full"
-                  />
-                </div>
-                <p className="text-green-600 mt-2 text-sm flex items-center gap-2">
-                  <span className="w-2 h-2 bg-green-600 rounded-full border-4 border-green-600"></span>
-                  Available
-                </p>
-                <p className="text-base font-semibold mt-2">{item.name}</p>
-                <p className="text-sm text-gray-500">{item.speciality}</p>
-              </div>
-            ))}
-          </div>
+          ))}
         </div>
       </div>
-    </>
+
+      {/* Desktop Layout - Hidden on small screens */}
+      <p className="hidden sm:block text-lg text-gray-600 font-medium mb-4">
+        Browse through the doctors specialists.
+      </p>
+
+      <div className="w-full grid grid-cols-1 lg:grid-cols-6 gap-6">
+        {/* Desktop Sidebar - Hidden on small screens */}
+        <div className="hidden sm:block col-span-1 text-gray-600 text-sm">
+          {specialties.map((specialty) => (
+            <p
+              key={specialty}
+              onClick={() => handleSpecialtyClick(specialty)}
+              className={`
+                mb-2 pl-3 pr-6 pt-1 pb-1 border rounded transition-all cursor-pointer
+                ${
+                  activeSpecialty === specialty
+                    ? "border-blue-500 text-blue-600"
+                    : "border-gray-300 hover:bg-gray-50"
+                }
+              `}
+            >
+              {specialty}
+            </p>
+          ))}
+        </div>
+
+        {/* Doctors Grid */}
+        <div className="col-span-1 lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+          {filterDoc.map((item) => (
+            <div
+              key={item.id}
+              className="flex flex-col border border-blue-200 rounded-xl cursor-pointer hover:translate-y-[-10px] transition-all duration-500"
+            >
+              <div className="w-full bg-[#EAEFFF] rounded-t-xl overflow-hidden">
+                <img
+                  src={item.image}
+                  alt={`Doctor ${item.name}`}
+                  className="w-full object-cover"
+                />
+              </div>
+              <p className="text-green-500 px-4 text-left w-full flex items-center gap-2 mt-2">
+                <span className="w-2 h-2 bg-green-500 rounded-full border-4 border-green-500" />
+                Available
+              </p>
+              <p className="text-sm font-medium text-left text-gray-800 px-4">
+                {item.name}
+              </p>
+              <p className="text-sm text-left text-gray-600 px-4 mb-4">
+                {item.speciality}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
   );
 };
 

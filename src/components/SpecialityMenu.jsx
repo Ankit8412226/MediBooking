@@ -1,7 +1,12 @@
 import React, { forwardRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { specialityData } from "../assets/assets_frontend/assets";
 
 const SpecialityMenu = forwardRef((props, ref) => {
+  const navigate = useNavigate();
+  const handleClick = (speciality) => {
+    navigate(`/AllDoctors?speciality=${speciality}`);
+  };
   return (
     <div className="w-full flex flex-col items-center justify-center px-4 md:px-10 lg:px-20 py-10 md:py-16 max-w-[100vw]">
       <div className="w-full flex flex-col items-center justify-center gap-6">
@@ -34,7 +39,10 @@ const SpecialityMenu = forwardRef((props, ref) => {
                       group-hover:scale-110"
                   />
                 </div>
-                <p className="text-sm text-center group-hover:text-blue-600">
+                <p
+                  onClick={() => handleClick(item.speciality)}
+                  className="text-sm text-center group-hover:text-blue-600"
+                >
                   {item.speciality}
                 </p>
               </div>

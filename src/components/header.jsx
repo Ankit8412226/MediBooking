@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 const Header = () => {
   const navigationItems = [
     { name: "HOME", path: "/" },
-    { name: "ALLDOCTORS", path: "/doctors" },
+    { name: "ALLDOCTORS", path: "/AllDoctors" },
     { name: "ABOUT", path: "/about" },
     { name: "CONTACT", path: "/contact" },
   ];
