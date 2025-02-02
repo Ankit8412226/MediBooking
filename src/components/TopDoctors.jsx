@@ -1,38 +1,27 @@
 import React, { useEffect } from "react";
 import { doctors } from "../assets/assets_frontend/assets";
-import "animate.css";
+
 import { useNavigate } from "react-router-dom";
 
 const TopDoctors = () => {
   const navigate = useNavigate();
-
-  useEffect(() => {
-    // Add animation classes when component mounts
-    const elements = document.querySelectorAll(".animate-on-load");
-    elements.forEach((element, index) => {
-      element.classList.add("animate__animated");
-      element.classList.add(
-        index % 2 === 0 ? "animate__fadeInLeft" : "animate__fadeInRight"
-      );
-    });
-  }, []);
 
   const handleViewMore = () => {
     window.scrollTo({
       behavior: "smooth",
       top: 0,
     });
-    navigate(`/doctors`);
+    navigate(`/AllDoctors`);
   };
 
   return (
     <>
       <div className="flex items-center justify-center px-6 md:px-10 mt-4 gap-4 flex-col">
         <div className="flex flex-col items-center justify-center text-center">
-          <p className="text-black font-semibold text-3xl animate__animated animate__fadeInDown">
+          <p className="text-black font-semibold text-3xl ">
             Top Doctors to Book
           </p>
-          <p className="text-black font-sm leading-6 animate__animated animate__fadeInDown animate__delay-1s">
+          <p className="text-black font-sm leading-6  ">
             Simply browse through our extensive list of trusted doctors.
           </p>
         </div>
@@ -42,7 +31,7 @@ const TopDoctors = () => {
           {doctors.slice(0, 10).map((item, index) => (
             <div
               key={item.id}
-              className={`animate-on-load flex flex-col min-w-55 border border-blue-200 rounded-xl cursor-pointer hover:translate-y-[-10px] transition-all duration-500`}
+              className={` flex flex-col min-w-55 border border-blue-200 rounded-xl cursor-pointer hover:translate-y-[-10px] transition-all duration-500`}
             >
               <div className="w-full bg-[#EAEFFF] rounded-t-[12px] overflow-hidden">
                 <img
