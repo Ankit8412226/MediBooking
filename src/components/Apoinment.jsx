@@ -104,6 +104,7 @@ const DoctorDetails = () => {
       alert(
         `Booking appointment with Dr. ${doctor.name} on ${selectedDate.fullDate} at ${selectedTime}`
       );
+      navigate(`/AppointmentConfirmation/${id}`);
       // In a real app, you would integrate with a booking backend
     } else {
       alert("Please select both date and time");

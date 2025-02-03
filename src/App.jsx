@@ -8,6 +8,7 @@ import MainLyout from "./pages/MainLyout";
 import AllDoctors from "./components/AllDoctors";
 import About from "./components/About";
 import Appointment from "./components/Apoinment";
+import AppointmentConfirmation from "./components/AppointmentConfirmation";
 
 function App() {
   return (
@@ -22,6 +23,10 @@ function App() {
           <Route path="/AllDoctors" element={<AllDoctors />} />
           <Route path="/about" element={<About />} />
           <Route path="/appointment/:id" element={<Appointment />} />
+          <Route
+            path="AppointmentConfirmation/:id"
+            element={<AppointmentConfirmation />}
+          />
         </Route>
       </Routes>
     </div>
