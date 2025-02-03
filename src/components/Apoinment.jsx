@@ -2,6 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { doctors } from "../assets/assets_frontend/assets";
 import { format, addDays, startOfToday } from "date-fns";
+import {
+  CalendarCheck,
+  Clock,
+  UserCheck,
+  ShieldCheck,
+  Star,
+} from "lucide-react";
 
 const DoctorDetails = () => {
   const { id } = useParams();
@@ -119,28 +126,34 @@ const DoctorDetails = () => {
     <div className="container mx-auto py-10 px-4">
       <div className="flex flex-col md:flex-row justify-between items-start space-y-6 md:space-y-0 md:space-x-8">
         {/* Doctor Image */}
-        <div className="w-full md:w-1/3 bg-blue-50 p-6 rounded-2xl flex justify-center items-center shadow-md">
+        <div className="w-full md:w-1/3 bg-blue-50 p-6 rounded-2xl flex justify-center items-center shadow-md relative">
           <img
             src={doctor.image}
             alt={doctor.name}
             className="w-full max-w-[300px] h-auto object-cover rounded-xl shadow-lg"
           />
+          <div className="absolute bottom-[-20px] right-[-20px] bg-green-500 text-white p-3 rounded-full shadow-lg">
+            <ShieldCheck size={32} />
+          </div>
         </div>
 
         {/* Doctor Details */}
         <div className="w-full md:w-2/3 space-y-6">
           <div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-3">
-              {doctor.name} <span className="text-blue-500">✔</span>
+            <h2 className="text-3xl font-bold text-gray-900 mb-3 flex items-center gap-3">
+              {doctor.name}
+              <Star className="text-yellow-500 fill-yellow-500" size={28} />
             </h2>
-            <p className="text-lg text-gray-700 mb-2">
-              {doctor.degree} - {doctor.speciality} ({doctor.experience} )
+            <p className="text-lg text-blue-600 mb-2 flex items-center gap-2">
+              <UserCheck className="text-blue-600" />
+              {doctor.degree} - {doctor.speciality} ({doctor.experience})
             </p>
             <p className="text-md text-gray-600">{doctor.about}</p>
           </div>
 
-          <div>
-            <p className="text-lg font-semibold text-gray-700">
+          <div className="flex justify-between items-center">
+            <p className="text-lg font-semibold text-gray-700 flex items-center gap-2">
+              <CalendarCheck className="text-green-600" />
               Appointment fee:{" "}
               <span className="text-gray-900 font-bold">${doctor.fees}</span>
             </p>
@@ -148,7 +161,9 @@ const DoctorDetails = () => {
 
           {/* Booking Dates */}
           <div className="space-y-4">
-            <h3 className="text-2xl font-semibold">Select a Date</h3>
+            <h3 className="text-2xl font-semibold flex items-center gap-2">
+              <Clock className="text-blue-600" /> Select a Date
+            </h3>
             <div className="flex overflow-x-auto space-x-3 pb-3 scrollbar-thin scrollbar-thumb-blue-300 scrollbar-track-blue-100">
               {generateWeekDates().map((dateObj) => (
                 <button
@@ -174,13 +189,13 @@ const DoctorDetails = () => {
           {selectedDate && (
             <div className="space-y-4">
               <h3 className="text-2xl font-semibold">Select a Time Slot</h3>
-              <div className="flex overflow-x-auto space-x-3 pb-3 scrollbar-thin scrollbar-thumb-blue-300 scrollbar-track-blue-100">
+              <div className="grid grid-cols-4 gap-3 overflow-x-auto pb-3 scrollbar-thin scrollbar-thumb-blue-300 scrollbar-track-blue-100">
                 {timeSlots.map((time, idx) => (
                   <button
                     key={idx}
                     onClick={() => handleTimeSelect(time)}
                     disabled={availableSlots[selectedDate.fullDate]?.[time]}
-                    className={`flex-shrink-0 w-24 py-3 rounded-xl border-2 text-center transition duration-300
+                    className={`py-3 rounded-xl border-2 text-center transition duration-300
                       ${
                         selectedTime === time
                           ? "bg-primary text-white border-blue-600"
@@ -201,7 +216,7 @@ const DoctorDetails = () => {
             <button
               onClick={handleBookAppointment}
               disabled={!selectedDate || !selectedTime}
-              className={`w-full py-4 rounded-full font-semibold text-lg transition duration-300 
+              className={`w-full py-4 rounded-full font-semibold text-lg transition duration-300 transform hover:scale-[1.02] active:scale-[0.98]
                 ${
                   selectedDate && selectedTime
                     ? "bg-primary text-white hover:bg-blue-600 shadow-md"
@@ -217,22 +232,25 @@ const DoctorDetails = () => {
       {/* Related Doctors */}
       {relatedDoctors.length > 0 && (
         <div className="mt-16">
-          <h3 className="text-3xl font-semibold mb-8 text-gray-800">
+          <h3 className="text-3xl font-semibold mb-8 text-center text-gray-800">
             Related Doctors
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {relatedDoctors.map((item) => (
               <div
                 key={item._id}
-                className="flex flex-col border border-blue-200 rounded-xl cursor-pointer hover:translate-y-[-10px] transition-all duration-500"
+                className="flex flex-col border border-blue-200 rounded-xl cursor-pointer hover:translate-y-[-10px] transition-all duration-500 transform hover:scale-105 hover:shadow-xl"
                 onClick={() => handleNavigate(item._id)}
               >
-                <div className="w-full bg-[#EAEFFF] rounded-t-xl overflow-hidden">
+                <div className="w-full bg-[#EAEFFF] rounded-t-xl overflow-hidden relative">
                   <img
                     src={item.image}
                     alt={`Doctor ${item.name}`}
                     className="w-full object-cover"
                   />
+                  <div className="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm">
+                    Available
+                  </div>
                 </div>
                 <p className="text-green-500 px-4 text-left w-full flex items-center gap-2 mt-2">
                   <span className="w-2 h-2 bg-green-500 rounded-full border-4 border-green-500" />
