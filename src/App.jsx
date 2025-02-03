@@ -6,6 +6,7 @@ import Signup from "./pages/Signup";
 import ForgotPassword from "./pages/ForgotPassword";
 import MainLyout from "./pages/MainLyout";
 import AllDoctors from "./components/AllDoctors";
+import About from "./components/About";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/register" element={<Signup />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/AllDoctors" element={<AllDoctors />} />
+          <Route path="/about" element={<About />} />
         </Route>
       </Routes>
     </div>
