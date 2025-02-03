@@ -44,6 +44,14 @@ const AllDoctors = () => {
     }
   };
 
+  const handleNavigate = (id) => {
+    window.scrollTo({
+      behavior: "smooth",
+      top: 0,
+    });
+    navigate(`/appointment/${id}`);
+  };
+
   return (
     <div className="w-full gap-y-6 flex flex-col items-start justify-center">
       {/* Mobile Header - Only visible on small screens */}
@@ -115,8 +123,9 @@ const AllDoctors = () => {
         <div className="col-span-1 lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
           {filterDoc.map((item) => (
             <div
-              key={item.id}
+              key={item._id}
               className="flex flex-col border border-blue-200 rounded-xl cursor-pointer hover:translate-y-[-10px] transition-all duration-500"
+              onClick={() => handleNavigate(item._id)}
             >
               <div className="w-full bg-[#EAEFFF] rounded-t-xl overflow-hidden">
                 <img

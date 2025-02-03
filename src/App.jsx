@@ -7,6 +7,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import MainLyout from "./pages/MainLyout";
 import AllDoctors from "./components/AllDoctors";
 import About from "./components/About";
+import Appointment from "./components/Apoinment";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/AllDoctors" element={<AllDoctors />} />
           <Route path="/about" element={<About />} />
+          <Route path="/appointment/:id" element={<Appointment />} />
         </Route>
       </Routes>
     </div>
