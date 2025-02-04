@@ -9,6 +9,7 @@ import AllDoctors from "./components/AllDoctors";
 import About from "./components/About";
 import Appointment from "./components/Apoinment";
 import AppointmentConfirmation from "./components/AppointmentConfirmation";
+import Contact from "./components/Contact";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
             path="AppointmentConfirmation/:id"
             element={<AppointmentConfirmation />}
           />
+          <Route path="/contact" element={<Contact />} />
         </Route>
       </Routes>
     </div>
