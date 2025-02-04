@@ -21,6 +21,7 @@ const Header = () => {
 
   const handleLoginClick = () => {
     navigate("/Login");
+    setIsSidebarOpen(false);
   };
 
   const handleLogout = () => {
