@@ -11,7 +11,10 @@ const Home = () => {
   return (
     <div>
       <Header />
-      <Hero />
+      <div className="mt-[100px]">
+        <Hero />
+      </div>
+
       <SpecialityMenu />
       <TopDoctors />
       <Banner />

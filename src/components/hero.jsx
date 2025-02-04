@@ -10,7 +10,7 @@ const Hero = () => {
   return (
     <div
       ref={pageRef}
-      className="w-full flex flex-col md:flex-row bg-primary rounded-lg items-center justify-between mt-4 gap-4  md:px-10 "
+      className="w-full flex flex-col md:flex-row bg-primary rounded-lg items-center justify-between mt-6 gap-4  md:px-10 "
     >
       {/* Left Section */}
       <div className="w-full md:w-1/2 flex flex-col items-center md:items-start justify-center gap-6 text-center md:text-left p-8 md:px-10 md:m-auto">
